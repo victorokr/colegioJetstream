@@ -19,7 +19,7 @@
                 </div>
 
 
-
+                <!-- boton modo dark -->
                 <div x-data="window.themeSwitcher()" x-init="switchTheme()" @keydown.window.tab="switchOn = false" class="flex items-center justify-center space-x-2">
                     <input id="thisId" type="checkbox" name="switch" class="hidden" :checked="switchOn">
 
