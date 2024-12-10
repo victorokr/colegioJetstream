@@ -14,8 +14,8 @@ return [
     | guards that is already present in your "auth" configuration file.
     |
     */
-
-    'guard' => 'web',
+    //'guard' => 'web', antes
+    'guard' => 'web', 
 
     /*
     |--------------------------------------------------------------------------
@@ -73,7 +73,12 @@ return [
     |
     */
 
-    'home' => '/dashboard',
+    // 'home' => '/dashboard', antes
+    'home' => function () {
+    return auth()->guard('acudiente')->check()
+        ? '/acudiente/dashboard'
+        : '/dashboard';
+    },
 
     /*
     |--------------------------------------------------------------------------
@@ -144,9 +149,9 @@ return [
     */
 
     'features' => [
-        Features::registration(),
+        // Features::registration(),
         Features::resetPasswords(),
-        // Features::emailVerification(),
+        Features::emailVerification(),
         Features::updateProfileInformation(),
         Features::updatePasswords(),
         Features::twoFactorAuthentication([

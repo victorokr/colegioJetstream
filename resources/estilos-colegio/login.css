@@ -1,0 +1,97 @@
+/*opacidad a solo la imagen de fondo del login*/
+.container__login{
+    position: relative;
+    min-height: 100vh; /* Usar min-height en lugar de height para permitir que el contenido se expanda */
+    width: 100%;
+    overflow: hidden;
+     
+}
+
+.container__login::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-image: url('/public/images/estudiantes.jpg');
+    background-size: cover;
+    background-attachment: fixed ;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.2;
+    z-index: -1;
+
+}
+
+/*--------------------------------------------------------------------------------------------------*/
+
+.card-group__login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2%;
+    padding-bottom: 100px;
+    
+}
+
+.login__card-body{
+    display: flex;
+    justify-content: center;
+    padding:  0;
+    margin-top: 175px;
+    
+}
+
+.login__card-text{
+    font-size: 14px;
+    color: darkgray;
+    text-align: center;
+}
+
+.login__container-forgot{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+
+
+
+
+
+@media (max-width: 575.98px) {
+    .login__row{
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+   
+    
+  
+}
+
+
+@media (min-width: 576px){
+    
+}
+
+
+@media (min-width: 768px){
+    
+}
+
+
+@media (min-width: 992px){
+    
+}
+
+
+@media (min-width: 1200px) {
+ 
+}
+
+
+@media (min-width: 1400px) {
+ 
+}

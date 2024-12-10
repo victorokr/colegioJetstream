@@ -1,0 +1,104 @@
+.carousel-caption{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    height: 100%;
+    left: 8%;
+    top: 0;
+    transform: none;
+    text-align: left;
+    padding: 20px;
+    font-family: "Momserrat", sans-serif ;
+    font-size: 44px;
+    font-weight: 700;
+    color: #413e66;
+    line-height: 30px;
+}
+
+.nav__text-color{
+    color: #1bb1dc;
+    
+}
+
+.btn-info{
+    font-family: "Momserrat", sans-serif ;
+    color: #fff;
+    padding: 8px 30px 8px 30px;
+    font-weight: 700;
+    font-size: 15px;
+    margin-top: 35px;
+}
+
+
+
+
+
+
+@media (max-width: 575.98px) {
+    .carousel-caption{
+        font-size: 12px !important;
+        line-height: 3px !important;
+        left: 8px;
+    }
+    .btn-info{
+        padding: 4px 10px 4px 10px !important;
+        font-weight: 700 !important;
+        font-size: 12px !important;
+        margin-top: 15px !important;
+    }
+
+  
+}
+
+
+@media (min-width: 576px){
+    .carousel-caption{
+        font-size: 15px !important;
+        line-height: 10px !important;
+    }
+    .btn-info{
+        padding: 8px 20px 8px 20px !important;
+        font-weight: 700 !important;
+        font-size: 12px !important;
+        margin-top: 35px !important;
+    }
+}
+
+
+@media (min-width: 768px){
+    .carousel-caption{
+        font-size: 20px !important;
+        line-height: 10px !important;
+    }
+    .btn-info{
+        padding: 8px 20px 8px 20px !important;
+        font-weight: 700 !important;
+        font-size: 12px !important;
+        margin-top: 35px !important;
+    }
+}
+
+
+@media (min-width: 992px){
+    .carousel-caption{
+        font-size: 30px !important;
+        line-height: 20px !important;
+    }
+}
+
+
+@media (min-width: 1200px) {
+    .carousel-caption{
+        font-size: 30px !important;
+        line-height: 30px !important;
+    }
+}
+
+
+@media (min-width: 1400px) {
+    .carousel-caption{
+        font-size: 44px !important;
+    }
+    
+}

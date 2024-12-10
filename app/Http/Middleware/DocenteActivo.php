@@ -17,21 +17,25 @@ class DocenteActivo
      */
     public function handle(Request $request, Closure $next): Response
     {
-
-
-        
+       
+        // Check if any user is authenticated
         if (Auth::check()) {
-            $user = Auth::user();
-            if ($user->id_estadoDocente === 2) {
-                //Log them out
-                Auth::guard('docente')->logout();
+            // Detect the current guard (docente or acudiente)
+            $guard = Auth::getDefaultDriver();
 
-                //Redirect them somewhere with a message
+            $user = Auth::user(); // Get the current authenticated user
+
+            // Check if the user is not active (id_estadoUsuario == 2)
+            if ($user->id_estadoUsuario === 2) {
+                // Log out based on the current guard
+                Auth::guard($guard)->logout();
+
+                // Invalidate the session
                 $request->session()->invalidate();
-
                 $request->session()->regenerateToken();
-        
-                return redirect('/');
+
+                // Redirect to the login page with a message
+                return redirect('/')->with('error', 'Tu cuenta ha sido desactivada.');
             }
         }
 

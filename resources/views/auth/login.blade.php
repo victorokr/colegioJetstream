@@ -1,48 +1,52 @@
-<x-guest-layout>
-    <x-authentication-card>
-        <x-slot name="logo">
-            <x-authentication-card-logo />
-        </x-slot>
+<div class="container__login"> 
+    <x-GuestLayout>
+        
+        <x-authentication-card>
+            <x-slot name="logo">
+                <x-authentication-card-logo />
+            </x-slot>
 
-        <x-validation-errors class="mb-4" />
+            <x-validation-errors class="mb-4" />
 
-        @session('status')
-            <div class="mb-4 font-medium text-sm text-green-600 dark:text-green-400">
-                {{ $value }}
-            </div>
-        @endsession
+            @session('status')
+                <div class="mb-4 text-sm text-success">
+                    {{ $value }}
+                </div>
+            @endsession
 
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
+            <form method="POST" action="{{ isset($guard) ? url($guard.'/login'): route('login') }}">
+                @csrf
+                
+                <div class=" mb-4">
+                    <!-- <x-label for="floatingInput" value="{{ __('correo') }}" /> -->
+                    <x-input id="email"  type="email" name="email" :value="old('email')" placeholder="ingresa tu correo" required autofocus autocomplete="username" />
+                </div>
 
-            <div>
-                <x-label for="email" value="{{ __('Email') }}" />
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            </div>
+                <div class="">
+                    <!-- <x-label for="floatingInput" value="{{ __('Password') }}" /> -->
+                    <x-input id="password" class="block mt-1 w-full" type="password" name="password" placeholder="ingresa tu contraseña" required autocomplete="current-password" />
+                </div>
 
-            <div class="mt-4">
-                <x-label for="password" value="{{ __('Password') }}" />
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
-            </div>
+                <div class=" mt-4">
+                    <label for="remember_me" class="d-flex justify-content-center">
+                        <x-checkbox id="remember_me" name="remember" />
+                        <span class="mx-2">{{ __('Recordar') }}</span>
+                    </label>
+                </div>
 
-            <div class="block mt-4">
-                <label for="remember_me" class="flex items-center">
-                    <x-checkbox id="remember_me" name="remember" />
-                    <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
-                </label>
-            </div>
+                <div class="login__container-forgot mt-2 text-center">
+                    @if (Route::has('password.request'))
+                        <a class="" href="{{ route('password.request') }}">
+                            {{ __('Olvidaste tu contraseña?') }}
+                        </a>
+                    @endif
 
-            <div class="flex items-center justify-end mt-4">
-                @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
-                @endif
-
-                <x-button class="ms-4">
-                    {{ __('Log in') }}
-                </x-button>
-            </div>
-        </form>
-    </x-authentication-card>
-</x-guest-layout>
+                    <x-button class="btn btn-primary btn-sm mt-4">
+                        {{ __('Log in') }}
+                    </x-button>
+                </div>
+            </form>
+        </x-authentication-card>
+        
+    </x-GuestLayout>
+</div> 

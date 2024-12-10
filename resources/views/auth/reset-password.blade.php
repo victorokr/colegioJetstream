@@ -6,29 +6,34 @@
 
         <x-validation-errors class="mb-4" />
 
-        <form method="POST" action="{{ route('password.update') }}">
+        <form method="POST" action="{{ route('password.update') }}" class="validation-form">
             @csrf
 
             <input type="hidden" name="token" value="{{ $request->route('token') }}">
 
             <div class="block">
-                <x-label for="email" value="{{ __('Email') }}" />
+                <x-label for="email" value="{{ __('Correo') }}" />
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus autocomplete="username" />
             </div>
 
             <div class="mt-4">
-                <x-label for="password" value="{{ __('Password') }}" />
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
+                <x-label for="password" value="{{ __('Contraseña') }}" /> 
+                <img class="img-password cursor-pointer" data-input="contraseña-nueva" role="button" width="" height="" src="{{ asset('images/ojo.png') }}" alt="" />
+                <x-input id="contraseña-nueva" class="block mt-1 w-full input-password" type="password"  name="password" required autocomplete="new-password" 
+                required data-parsley-pattern="^(?=.*[A-Z])(?=.*\d)[A-Za-z\d\p{P}\p{S}\s@#^&*()_\-+=!{}\[\]:;&quot;'&lt;&gt;,.?/\\|~]{10,}$" data-parsley-trigger="keyup"/>
+                <span id="passwordHelpInline" class="form-text">Minimo 10 caracteres, 1 mayuscula 1 numero.</span>
             </div>
 
             <div class="mt-4">
-                <x-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
-                <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
+                <x-label for="password_confirmation" value="{{ __('Confirmar Contraseña') }}" />
+                <img class="img-password cursor-pointer" data-input="confirmar-contraseña" role="button" width="" height="" src="{{ asset('images/ojo.png') }}" alt="" />
+                <x-input id="confirmar-contraseña" class="block mt-1 w-full input-password" type="password" name="password_confirmation" required autocomplete="new-password"
+                data-parsley-equalto="#contraseña-nueva" data-parsley-trigger="keyup" />
             </div>
 
             <div class="flex items-center justify-end mt-4">
                 <x-button>
-                    {{ __('Reset Password') }}
+                    {{ __('Restablecer contraseña') }}
                 </x-button>
             </div>
         </form>

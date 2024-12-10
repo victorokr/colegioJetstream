@@ -1,7 +1,16 @@
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
-@tailwind utilities;
+@tailwind utilities; */
 
-[x-cloak] {
+@import '../estilos-colegio/navbar-guest.css';
+@import '../estilos-colegio/baner.css';
+@import '../estilos-colegio/footer.css';
+@import '../estilos-colegio/login.css';
+@import '../estilos-colegio/navbar-auth.css';
+@import '../estilos-colegio/subNav-profile.css';
+@import '../estilos-colegio/profile.css';
+@import '../estilos-colegio/parsley.css';
+
+/* [x-cloak] {
     display: none;
-}
+} */

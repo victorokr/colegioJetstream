@@ -1,10 +1,14 @@
 <?php
 
 use Illuminate\Foundation\Application;
+
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 
-// use App\Http\Middleware\DocenteActivo;
+ use App\Http\Middleware\AdminRedirectIfAuthenticated;
+ use App\Http\Middleware\RedirectIfAuthenticated;
+
+ //use App\Http\Middleware\ReturnGuardSistemDefault;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -18,9 +22,18 @@ return Application::configure(basePath: dirname(__DIR__))
         // $middleware->append(DocenteActivo::class);
 
         $middleware->web(append: [
-            
             \App\Http\Middleware\DocenteActivo::class,
+            
         ]);
+
+
+        $middleware->alias([
+            'usuarioRedirect'=> AdminRedirectIfAuthenticated::class,
+            //'guardMiddleware' => ReturnGuardSistemDefault::class,
+        ]);
+
+       
+            
 
 
     })

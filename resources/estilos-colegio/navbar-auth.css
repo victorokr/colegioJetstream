@@ -1,0 +1,10 @@
+.nav-auth__container{
+    padding: 0 100px 0 100px;
+}
+
+
+
+.nav-auth__ul{
+    display: flex;
+    align-items: center;
+}

@@ -1,4 +1,4 @@
-@props(['title' => __('Confirm Password'), 'content' => __('For your security, please confirm your password to continue.'), 'button' => __('Confirm')])
+@props(['title' => __('Confirmar contraseña'), 'content' => __('Por seguridad, por favor confirma tu contraseña para continuar.'), 'button' => __('Confirmar')])
 
 @php
     $confirmableId = md5($attributes->wire('then'));
@@ -18,7 +18,7 @@
 <x-dialog-modal wire:model.live="confirmingPassword">
     <x-slot name="title">
         {{ $title }}
-    </x-slot>
+    </x-slot> 
 
     <x-slot name="content">
         {{ $content }}

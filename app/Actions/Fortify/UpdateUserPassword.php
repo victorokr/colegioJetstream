@@ -2,7 +2,8 @@
 
 namespace App\Actions\Fortify;
 
-use App\Models\User;
+
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\UpdatesUserPasswords;
@@ -12,19 +13,26 @@ class UpdateUserPassword implements UpdatesUserPasswords
     use PasswordValidationRules;
 
     /**
-     * Validate and update the user's password.
+     * Validate and update the user's password based on the authenticated guard.
      *
      * @param  array<string, string>  $input
      */
-    public function update(User $user, array $input): void
+    public function update($user, array $input): void
     {
+        // Get the current guard (docente or acudiente)
+        $guard = Auth::getDefaultDriver();
+        
+        // Modify the current_password validation rule to match the guard
+        $currentPasswordRule = 'current_password:' . $guard;
+
         Validator::make($input, [
-            'current_password' => ['required', 'string', 'current_password:web'],
+            'current_password' => ['required', 'string', $currentPasswordRule],
             'password' => $this->passwordRules(),
         ], [
-            'current_password.current_password' => __('The provided password does not match your current password.'),
+            'current_password.current_password' => __('La contraseña proporcionada no coincide con tu contraseña actual.'),
         ])->validateWithBag('updatePassword');
 
+        // Update the password based on the user type
         $user->forceFill([
             'password' => Hash::make($input['password']),
         ])->save();

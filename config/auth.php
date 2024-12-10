@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => env('AUTH_GUARD', 'docente'), //web antes
+        'guard' => env('AUTH_GUARD', 'web'), //web antes
         'passwords' => env('AUTH_PASSWORD_BROKER', 'users'),
     ],
 

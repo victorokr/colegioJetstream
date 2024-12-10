@@ -1,0 +1,63 @@
+
+.navbar__custom{
+    padding: 0;
+    background-color: #ffffff !important;
+    
+}
+
+
+
+.container-fluid{
+    padding: 2px 68px 2px 68px;
+}
+
+.navbar-collapse a{
+    font-family: "Momserrat", sans-serif ;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 600;
+    color: #555186;
+
+}
+
+.navbar-collapse a:hover{
+    color: #1bb1dc;
+}
+
+
+
+
+
+@media (max-width: 575.98px) {
+    .container-fluid{
+        padding: 2px 28px 2px 28px !important;
+    }
+  
+}
+
+
+@media (min-width: 576px){
+ 
+}
+
+
+@media (min-width: 768px){
+  
+}
+
+
+@media (min-width: 992px){
+  
+}
+
+
+@media (min-width: 1200px) {
+ 
+}
+
+
+@media (min-width: 1400px) {
+ 
+}
+
+

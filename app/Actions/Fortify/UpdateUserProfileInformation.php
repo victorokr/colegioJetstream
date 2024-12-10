@@ -3,6 +3,7 @@
 namespace App\Actions\Fortify;
 
 use App\Models\Docente;
+use App\Models\Responsable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -15,11 +16,13 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
      *
      * @param  array<string, mixed>  $input
      */
-    public function update(Docente $user, array $input): void
+    public function update($user, array $input): void
     {
+        $table = $user instanceof Responsable ? 'responsable' : 'docente';
+        $idField = $user instanceof Responsable ? 'id_responsable' : 'id_docente';
         Validator::make($input, [
             'nombres' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
+            'email' => ['required', 'email', 'max:255', Rule::unique($table)->ignore($user->$idField, $idField)],
             'photo' => ['nullable', 'mimes:jpg,jpeg,png', 'max:1024'],
         ])->validateWithBag('updateProfileInformation');
 
@@ -29,10 +32,10 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
 
         if ($input['email'] !== $user->email &&
             $user instanceof MustVerifyEmail) {
-            $this->updateVerifiedUser($user, $input);
+            $this->updateVerifiedUser($user, $input); 
         } else {
             $user->forceFill([
-                'nombres' => $input['name'],
+                'nombres' => $input['nombres'],
                 'email' => $input['email'],
             ])->save();
         }
@@ -43,10 +46,10 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
      *
      * @param  array<string, string>  $input
      */
-    protected function updateVerifiedUser(Docente $user, array $input): void
+    protected function updateVerifiedUser($user, array $input): void
     {
         $user->forceFill([
-            'nombres' => $input['name'],
+            'nombres' => $input['nombres'],
             'email' => $input['email'],
             'email_verified_at' => null,
         ])->save();
