@@ -17,7 +17,7 @@ class DocenteActivo
      */
     public function handle(Request $request, Closure $next): Response
     {
-       
+
         // Check if any user is authenticated
         if (Auth::check()) {
             // Detect the current guard (docente or acudiente)
@@ -27,8 +27,13 @@ class DocenteActivo
 
             // Check if the user is not active (id_estadoUsuario == 2)
             if ($user->id_estadoUsuario === 2) {
-                // Log out based on the current guard
-                Auth::guard($guard)->logout();
+                 // El condicional method_exists(Auth::guard($guard), 'logout') es útil en caso de que uses múltiples guards y algunos no admitan sesiones, como:
+                 //Guards basados en tokens (API Token).
+                 //Guards personalizados que no implementan logout.
+                if (method_exists(Auth::guard($guard), 'logout')) {
+                    // Log out the user
+                    Auth::guard($guard)->logout();
+                }
 
                 // Invalidate the session
                 $request->session()->invalidate();

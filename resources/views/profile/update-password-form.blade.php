@@ -1,4 +1,4 @@
-<div class="container-fluid container__profile mt-5"> 
+<div class="container-fluid container__profile mt-5">
  <div class="row g-3">
     <div class="col-md-4">
         <h3>{{ __('Actualizar contraseña') }}</h3>
@@ -23,8 +23,8 @@
                         <div class="col-12 pt-3">
                             <label for="password" class="form-label">{{ __('Nueva contraseña') }}</label>
                             <img class="img-password cursor-pointer" data-input="contraseña-nueva" role="button" width="" height="" src="{{ asset('images/ojo.png') }}" alt="" />
-                            <input class="form-control input-password" id="contraseña-nueva" type="password" placeholder="minimo 10 caracteres, una mayuscula y un numero"  wire:model="state.password" autocomplete="new-password" required autocomplete="nombres" 
-                            required data-parsley-pattern="^(?=.*[A-Z])(?=.*\d)[A-Za-z\d\p{P}\p{S}\s@#^&*()_\-+=!{}\[\]:;&quot;'&lt;&gt;,.?/\\|~]{10,}$" data-parsley-trigger="keyup" >
+                            <input class="form-control input-password" id="contraseña-nueva" type="password" placeholder="10 caracteres, 1 especial, 1 mayuscula y 1 numero"  wire:model="state.password" autocomplete="new-password" required autocomplete="nombres"
+                            required data-parsley-pattern="^(?=(.*[A-Z]))(?=(.*\d))(?=(.*[^\w\s])).{10,}$" data-parsley-trigger="keyup" >
                             <x-input-error for="password" class="mt-2" />
                         </div>
 

@@ -1,18 +1,27 @@
-
-.navbar__custom{
+.navbar__custom {
     padding: 0;
     background-color: #ffffff !important;
-    
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+/* saca los elementos de debajo del nav, este main esta en App-layout */
+main {
+    margin-top: 120px;
+    /* Ajusta según la altura del nav */
 }
 
 
-
-.container-fluid{
-    padding: 2px 68px 2px 68px;
+/* maneja en padding de todas las vistas */
+.container-fluid {
+    padding: 2px 80px 2px 80px;
 }
 
-.navbar-collapse a{
-    font-family: "Momserrat", sans-serif ;
+.navbar-collapse a {
+    font-family: "Momserrat", sans-serif;
     text-transform: uppercase;
     font-size: 14px;
     font-weight: 600;
@@ -20,7 +29,16 @@
 
 }
 
-.navbar-collapse a:hover{
+.form-check-label {
+    font-family: "Momserrat", sans-serif;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 700;
+    color: #555186;
+}
+
+.navbar-collapse a:hover,
+label:hover {
     color: #1bb1dc;
 }
 
@@ -29,35 +47,23 @@
 
 
 @media (max-width: 575.98px) {
-    .container-fluid{
+    .container-fluid {
         padding: 2px 28px 2px 28px !important;
     }
-  
+
 }
 
 
-@media (min-width: 576px){
- 
-}
+@media (min-width: 576px) {}
 
 
-@media (min-width: 768px){
-  
-}
+@media (min-width: 768px) {}
 
 
-@media (min-width: 992px){
-  
-}
+@media (min-width: 992px) {}
 
 
-@media (min-width: 1200px) {
- 
-}
+@media (min-width: 1200px) {}
 
 
-@media (min-width: 1400px) {
- 
-}
-
-
+@media (min-width: 1400px) {}

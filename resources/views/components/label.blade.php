@@ -1,5 +1,5 @@
 @props(['value'])
 
-<label >
+<label class="form-label mb-0">
     {{ $value ?? $slot }}
 </label>

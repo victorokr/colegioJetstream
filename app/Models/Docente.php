@@ -2,14 +2,16 @@
 
 namespace App\Models;
 
+use App\Models\Role;
+use Laravel\Sanctum\HasApiTokens;
+use Laravel\Jetstream\HasProfilePhoto;
+
+use Illuminate\Notifications\Notifiable;
+use Laravel\Fortify\TwoFactorAuthenticatable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
-use Laravel\Fortify\TwoFactorAuthenticatable;
-use Laravel\Jetstream\HasProfilePhoto;
-use Laravel\Sanctum\HasApiTokens;
 
 //se agregó implements MustVerifyEmail para verificar el email cuando cambia en profile
 class Docente extends Authenticatable implements MustVerifyEmail
@@ -36,10 +38,9 @@ class Docente extends Authenticatable implements MustVerifyEmail
         'email',
         'password',
         'lugarDeResidencia',
-        'estado',
-        'id_escalafon',
-        'id_nivel',
-        'id_perfil'
+        'id_perfil',
+        'id_estadoUsuario',
+
 
     ];
 
@@ -64,6 +65,9 @@ class Docente extends Authenticatable implements MustVerifyEmail
         'profile_photo_url',
     ];
 
+
+    protected $dates = ['updated_at','created_at']; //Esto asegura que las fechas sean tratadas como instancias de Carbon
+
     /**
      * Get the attributes that should be cast.
      *
@@ -76,4 +80,48 @@ class Docente extends Authenticatable implements MustVerifyEmail
             'password' => 'hashed',
         ];
     }
+
+
+
+
+
+
+    public function hasRoles(array $roles): bool
+    {
+        foreach ($roles as $role) {
+            if ($this->roles->contains('Nombre', $role)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+
+
+
+
+
+
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'docente_role', 'id_docente', 'id_role');
+    }
+
+
+
+    public function perfil()
+    {
+        return $this->belongsTo('App\Models\Perfil','id_perfil');
+    }
+
+
+
+    public function estadousuario()
+    {
+        return $this->belongsTo('App\Models\Estadousuario','id_estadoUsuario');
+    }
+
+
 }

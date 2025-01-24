@@ -10,6 +10,8 @@
 @import '../estilos-colegio/subNav-profile.css';
 @import '../estilos-colegio/profile.css';
 @import '../estilos-colegio/parsley.css';
+@import '../estilos-colegio/spinnerOverlay.css';
+@import '../estilos-colegio/fondoImgTodasLasVistasAuth.css';
 
 /* [x-cloak] {
     display: none;

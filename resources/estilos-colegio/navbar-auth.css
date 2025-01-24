@@ -1,10 +1,116 @@
-.nav-auth__container{
-    padding: 0 100px 0 100px;
+.nav-auth__container {
+    /* padding: 0 100px 0 100px; */
+
 }
 
 
 
-.nav-auth__ul{
+.nav-auth__ul {
     display: flex;
     align-items: center;
 }
+
+
+/* Cambiar el color del navbar-toggler-icon en modo oscuro en pantallas moviles, sin esto no aparece el boton */
+[data-bs-theme="dark"] .navbar-toggler-icon {
+    background-color: #4f4e4e;
+    /* Blanco semitransparente */
+    border-radius: 4px;
+    width: 30px;
+    height: 30px;
+}
+
+/* Ajuste opcional: Hacer el toggle más visible */
+[data-bs-theme="dark"] .navbar-toggler {
+    border-color: #1bb1dc;
+}
+
+
+
+/* Estilo del Sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    /* Oculta completamente el sidebar */
+    width: 300px;
+    /* Ancho del sidebar en pantallas grandes */
+    height: 100vh;
+    background-color: #515151;
+    color: white;
+    overflow-x: hidden;
+    transition: left 0.4s ease;
+    /* Animación suave */
+    z-index: 1000;
+    padding-top: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Botón para cerrar */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 30px;
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* Estilo de los links del Sidebar */
+.sidebar-links {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-links li {
+    padding: 15px 20px;
+}
+
+.sidebar-links a {
+    text-decoration: none;
+    color: white;
+    /* Color de texto blanco */
+    font-size: 18px;
+    display: block;
+    transition: 0.9s ease;
+}
+
+.sidebar-links a:hover {
+    color: #1bb1dc;
+    /* Color de hover */
+    background-color: rgba(255, 255, 255, 0.1);
+    /* Fondo sutil al pasar */
+}
+
+
+
+
+
+
+
+
+@media (max-width: 575.98px) {
+    .sidebar {
+        width: 100%;
+        /* Ocupa toda la pantalla en dispositivos pequeños */
+    }
+
+}
+
+
+@media (min-width: 576px) {}
+
+
+@media (min-width: 768px) {}
+
+
+@media (min-width: 992px) {}
+
+
+@media (min-width: 1200px) {}
+
+
+@media (min-width: 1400px) {}

@@ -2,14 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Models\Role;
+use Laravel\Sanctum\HasApiTokens;
+use Laravel\Jetstream\HasProfilePhoto;
 use Illuminate\Notifications\Notifiable;
 
 use Laravel\Fortify\TwoFactorAuthenticatable;
-use Laravel\Jetstream\HasProfilePhoto;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Responsable extends Authenticatable implements MustVerifyEmail
 {
@@ -38,7 +39,7 @@ class Responsable extends Authenticatable implements MustVerifyEmail
         'id_parentesco',
         'id_estadoUsuario',
         'id_tipoDocumento'
-        
+
 
     ];
 
@@ -75,4 +76,57 @@ class Responsable extends Authenticatable implements MustVerifyEmail
             'password' => 'hashed',
         ];
     }
+
+
+
+    public function hasRoles(array $roles): bool
+    {
+        foreach ($roles as $role) {
+            if ($this->roles->contains('Nombre', $role)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+
+
+
+
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'responsable_role','id_responsable','id_role');//el primero pertenece a la tabla pivot, 2do a la tabla empleado para evitar que eloquen lo busque en orden alfabetico, 3ro el id de la tabla a relacionar, tabla role.
+    }
+
+
+    public function tipoDeDocumento()
+    {
+        return $this->belongsTo('App\Models\Tipodocumento','id_tipoDocumento');
+    }
+
+
+    public function parentesco()
+    {
+        return $this->belongsTo('App\Models\Parentesco','id_parentesco');
+    }
+
+    public function responsabledos()
+    {
+        return $this->belongsToMany('App\Models\Responsabledos','Responsabledos_responsable','id_responsable','id_responsabledos');
+    }
+
+    public function ocupacion()
+    {
+        return $this->belongsToMany('App\Models\Ocupacion','Responsable_ocupacion','id_responsable','id_ocupacion');
+    }
+
+    public function estadousuario()
+    {
+        return $this->belongsTo('App\Models\Estadousuario','id_estadoUsuario');
+    }
+
+
+
 }

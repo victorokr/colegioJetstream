@@ -17,11 +17,11 @@
             </div>
 
             <div class="mt-4">
-                <x-label for="password" value="{{ __('Contraseña') }}" /> 
+                <x-label for="password" value="{{ __('Contraseña') }}" />
                 <img class="img-password cursor-pointer" data-input="contraseña-nueva" role="button" width="" height="" src="{{ asset('images/ojo.png') }}" alt="" />
-                <x-input id="contraseña-nueva" class="block mt-1 w-full input-password" type="password"  name="password" required autocomplete="new-password" 
-                required data-parsley-pattern="^(?=.*[A-Z])(?=.*\d)[A-Za-z\d\p{P}\p{S}\s@#^&*()_\-+=!{}\[\]:;&quot;'&lt;&gt;,.?/\\|~]{10,}$" data-parsley-trigger="keyup"/>
-                <span id="passwordHelpInline" class="form-text">Minimo 10 caracteres, 1 mayuscula 1 numero.</span>
+                <x-input id="contraseña-nueva" class="block mt-1 w-full input-password" type="password"  name="password" required autocomplete="new-password"
+                required data-parsley-pattern="^(?=(.*[A-Z]))(?=(.*\d))(?=(.*[^\w\s])).{10,}$" data-parsley-trigger="keyup"/>
+                <span id="passwordHelpInline" class="form-text">10 caracteres, 1 especial, 1 mayuscula y 1 numero.</span>
             </div>
 
             <div class="mt-4">

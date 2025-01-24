@@ -6,6 +6,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'colegio') }}</title>
+        <link rel="shortcut icon" href="{{ asset('images/logocisne-nav.png') }}">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -24,7 +25,12 @@
     <body>
         
         <x-Nav />
-
+        <!-- loading spinner -->
+        <div id="loader" class="spinner-div d-flex justify-content-center align-items-center ">
+            <div class="spinner-grow  text-light spinner-custom"  role="status">
+                <!-- <span class="visually-hidden">Loading...</span> -->
+            </div>
+        </div>
 
         <div class="d-flex justify-content-center">
                 <!-- aca se inyecta el forma login y register -->

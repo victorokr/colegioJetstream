@@ -3,10 +3,10 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AcudientesController;
-use App\Http\Controllers\AreaacudientesController;
+// use App\Http\Controllers\AreaacudientesController;
 use Laravel\Fortify\Http\Controllers\ConfirmablePasswordController;
-use Laravel\Fortify\Http\Controllers\ConfirmedPasswordStatusController;
-
+// use Laravel\Fortify\Http\Controllers\ConfirmedPasswordStatusController;
+use App\Livewire\Docentes\ListaDocentes;
 
 
 Route::get('/', function () {
@@ -61,6 +61,7 @@ Route::middleware([
     'auth:sanctum,web',
     config('jetstream.auth_session'),
     'verified',
+    
 ])->group(function () {
 
     Route::get('/dashboard', function () {
@@ -68,7 +69,15 @@ Route::middleware([
     })->name('dashboard');
 
     
+    // Ruta para la lista de docentes (administrador)
+    Route::get('/lista/docentes', ListaDocentes::class)
+    ->middleware('roles:Administrador')
+    ->name('docentes.index');
     
+     // Ruta para listado (cursos a evaluar)
+     Route::get('/listado', function () {
+        return view('cursos.listado');
+    })->middleware('roles:Empleado')->name('empleado.dashboard');
 
 
 });
