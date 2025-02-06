@@ -10,7 +10,7 @@
 
 /* saca los elementos de debajo del nav, este main esta en App-layout */
 main {
-    margin-top: 120px;
+    margin-top: 0px;
     /* Ajusta según la altura del nav */
 }
 

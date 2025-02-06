@@ -18,3 +18,10 @@ import { showToast, showConfirmation } from "./reutilizar-alertas";
 window.showToast = showToast;
 window.showConfirmation = showConfirmation;
 //console.log('Funciones globales registradas:', window.showToast, window.showConfirmation);
+
+import { initializeTooltips } from "./tooltips";
+
+// Inicializar tooltips después de que el DOM esté cargado
+document.addEventListener('DOMContentLoaded', () => {
+    initializeTooltips();
+});

@@ -1,56 +1,99 @@
 <div class="container-fluid">
-    <div class="row">
-        <div class="col d-flex justify-content-end">
-            <x-button class="" wire:click="openCreateModal">Nuevo Docente</x-button>
+    <x-card-around-table class="">
+        <x-slot name="header" class="">
+            <div class="d-flex flex-row justify-content-between">
+                <div class="d-flex justify-content-start">
+                    <span class="material-symbols-outlined mx-2 fs-2">group</span>
+                    <h5 class="mb-0 d-flex align-items-center">Docentes</h5>
+                </div>
+                <div class="">
+                    <x-button class="" wire:click="openCreateModal">Nuevo Docente</x-button>
+                </div>
+            </div>
+        </x-slot>
+        <!-- Campo de búsqueda -->
+        <div class="d-flex justify-content-between align-items-end">
+            <div class="col-3 mb-3 btn-sm position-relative">
+                <x-input type="text" class="form-control" placeholder="Buscar por nombre o documento" wire:model.live="search"></x-input>
+                @if($search)
+                    <button type="button" class="btn-close position-absolute top-50 end-0 translate-middle-y me-2"
+                        wire:click="$set('search', '')">
+                    </button>
+                @endif
+            </div>
+            <x-escudo-col-table />
         </div>
-    </div>
-    <div class="row">
-        <div class="col table-responsive">
-            <x-table class="">
-                <caption>Lista de Docentes</caption>
-                <thead class="table-light">
-                    <tr>
-                        <th scope="col">Nombres</th>
-                        <th scope="col">Documento</th>
-                        <th scope="col">Teléfono</th>
-                        <th scope="col">Dirección</th>
-                        <th scope="col">Residencia</th>
-                        <th scope="col">Correo</th>
-                        <th scope="col">Perfil</th>
-                        <th scope="col">Role</th>
-                        <th scope="col">Estado</th>
-                        <th scope="col">Modificado(a)</th>
-                        <th scope="col">Acciones</th>
 
-                    </tr>
-                </thead>
-                <tbody class="table-group-divider">
-                    @foreach($docentes as $docente)
+        <div class="row">
+            <div class="col table-responsive">
+                <x-table class="">
+                    <caption>Lista de Docentes</caption>
+                    <thead class="table-light">
                         <tr>
-                            <td class="text-nowrap fw-light ">{{ $docente->nombres }}</td>
-                            <td class="fw-light">{{ $docente->documento }}</td>
-                            <td class="fw-light">{{ $docente->telefono }}</td>
-                            <td class="text-nowrap fw-light">{{ $docente->direccion }}</td>
-                            <td class="fw-light">{{ $docente->lugarDeResidencia }}</td>
-                            <td class="fw-light">{{ $docente->email }}</td>
-                            <td class="fw-light">{{ $docente->perfil->perfil }}</td>
-                            <td class="text-nowrap fw-light">{{ $docente->roles->pluck('display_name')->implode(' - ') }}</td>
-                            <td class="fw-light">{{ $docente->estadousuario->estadoUsuario }}</td>
-                            <td class="fw-light">{{ $docente->updated_at->format('Y/m/d') }}</td>
-                            <td class="text-nowrap">
-                                <x-btn_edit class="" wire:click="openEditModal( {{$docente->id_docente}} )"></x-btn_edit>
-                                <x-btn_delete
-                                    class="{{ $this->canDelete($docente) ? '' : 'disabled' }}  border-0 " data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Tooltip on top"
-                                    wire:click="{{ $this->canDelete($docente) ? 'openDeleteModal(' . $docente->id_docente . ')' : '' }}"
-                                    title="{{ $this->canDelete($docente) ? 'Eliminar' : 'No puede eliminarse aún' }}">
-                                </x-btn_delete>
-                            </td>
+                            <th scope="col">Nombres</th>
+                            <th scope="col">Documento</th>
+                            <th scope="col">Teléfono</th>
+                            <th scope="col">Dirección</th>
+                            <th scope="col">Residencia</th>
+                            <th scope="col">Correo</th>
+                            <th scope="col">Perfil</th>
+                            <th scope="col">Role</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col">Modificado(a)</th>
+                            <th scope="col">Acciones</th>
+
                         </tr>
-                    @endforeach
-                </tbody>
-            </x-table>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        @forelse($docentes as $docente)
+
+                            <tr>
+                                <td class="text-nowrap fw-light ">{{ $docente->nombres }}</td>
+                                <td class="fw-light">{{ $docente->documento }}</td>
+                                <td class="fw-light">{{ $docente->telefono }}</td>
+                                <td class="text-nowrap fw-light">{{ $docente->direccion }}</td>
+                                <td class="fw-light">{{ $docente->lugarDeResidencia }}</td>
+                                <td class="fw-light">{{ $docente->email }}</td>
+                                <td class="fw-light">{{ $docente->perfil->perfil }}</td>
+                                <td class="text-nowrap fw-light">{{ $docente->roles->pluck('display_name')->implode(' - ') }}</td>
+                                <td class="fw-light">{{ $docente->estadousuario->estadoUsuario }}</td>
+                                <td class="fw-light">{{ $docente->updated_at->format('Y/m/d') }}</td>
+                                <td class="text-nowrap">
+                                    <x-btn_edit
+                                        class=""
+                                        wire:click="openEditModal( {{$docente->id_docente}} )"
+                                        data-bs-toggle="tooltip"
+                                        data-bs-placement="top"
+                                        data-bs-title="Editar Docente">
+                                    </x-btn_edit>
+                                    <x-btn_delete
+                                        class="{{ $this->canDelete($docente) ? '' : 'disabled' }}  border-0 "
+                                        data-bs-toggle="tooltip"
+                                        data-bs-placement="top"
+                                        data-bs-title="Eliminar este docente borrará todas sus calificaciones, logros y cursos asignados"
+                                        wire:click="{{ $this->canDelete($docente) ? 'openDeleteModal(' . $docente->id_docente . ')' : '' }}"
+                                        title="{{ $this->canDelete($docente) ? 'Eliminar' : 'No puede eliminarse aún' }}">
+                                    </x-btn_delete>
+                                </td>
+                            </tr>
+
+                        @empty
+                            <tr>
+                                <td colspan="11" class="text-center">No hay docentes disponibles.</td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </x-table>
+            </div>
         </div>
-    </div>
+        @if ($docentes->count())
+            <div class="mt-3">
+                {{ $docentes->links() }}
+            </div>
+        @endif
+    </x-card-around-table>
+
+
 
     <!-- Modal create docente -->
     <div wire:ignore.self class="modal fade modal-dialog-scrollable" id="createDocenteModal" tabindex="-1" aria-labelledby="createDocenteModalLabel" aria-hidden="true">

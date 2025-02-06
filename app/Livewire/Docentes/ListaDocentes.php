@@ -11,10 +11,11 @@ use Livewire\Component;
 use App\Models\Estadousuario;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Log;
+use Livewire\WithPagination; // Aquí importas el trait de Livewire
 
 class ListaDocentes extends Component
 {
-    public $docentes; //se le pasa al metodo mount
+    //public $docentes; //se le pasa al metodo mount
     public $perfiles;
     public $estadoUsuarios;
     public $id_estadousuario;
@@ -30,9 +31,15 @@ class ListaDocentes extends Component
         'delete-docente' => 'deleteDocente',
     ];
 
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap'; // Configurar Bootstrap como tema
+    public $search = ''; // Campo de búsqueda opcional
+
+
+
     public function mount()
-    {
-        $this->docentes       = Docente::all(); // Recupera todos los docentes
+    {   //estas propiedades alimentan a los modales y el metodo render()
+        //$this->docentes       = Docente::all(); // Recupera todos los docentes
         $this->perfiles       = Perfil::all();
         $this->estadoUsuarios = Estadousuario::all();
         $this->id_estadoUsuario = true; // Por defecto, encendido
@@ -233,16 +240,41 @@ class ListaDocentes extends Component
         }
     }
 
-
+//----------------------------------------------------------------------------------------
+    public function updatingSearch()
+    {
+        $this->resetPage(); // Reiniciar la paginación al cambiar el término de búsqueda
+    }
 
     public function render()
     {
-        return view('livewire.docentes.lista-docentes',[
+        // Carga los docentes con relaciones y evita N+1 consultas
+        $docentes = Docente::with(['perfil', 'roles', 'estadousuario'])
+        ->where(function ($query) {
+            if ($this->search) {
+                $query->where('nombres', 'like', '%' . $this->search . '%')
+                      ->orWhere('documento', 'like', '%' . $this->search . '%');
+            }
+        })
+        ->paginate(10);
+        //dd($docentes);
 
-            // 'canDelete' => function ($docente) {
-            //     return $docente->id_estadoUsuario === 2 && $docente->updated_at->lte(now()->subYear());
-            // }
 
+        // Retorna la vista con todas las variables necesarias y this es para reutilizar las propiedades ya cargadas del metodo mount()
+        return view('livewire.docentes.lista-docentes', [
+            'docentes' => $docentes,
+            'perfiles' => $this->perfiles,
+            'estadoUsuarios' => $this->estadoUsuarios,
+            'roles' => $this->roles,
         ])->layout('layouts.app');
     }
+
+
+
+
+
+
+
+
+
 }

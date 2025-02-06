@@ -1,0 +1,11 @@
+.material-symbols-outlined {
+    font-variation-settings:
+        'FILL' 1,
+        /* Relleno activado */
+        'wght' 700,
+        /* Grosor en 700 */
+        'GRAD' 0,
+        /* Sin gradiente */
+        'opsz' 40;
+    /* Tamaño óptico 40 */
+}

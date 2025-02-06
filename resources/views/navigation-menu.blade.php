@@ -1,5 +1,5 @@
 
-<nav class="navbar navbar__custom navbar-expand-lg shadow-sm  mb-0 bg-body-tertiary rounded ">
+<nav class="navbar navbar__custom navbar-expand-lg shadow-sm  mb-0 bg-body-tertiary rounded fixed-top ">
     <div class="container-fluid nav-auth__container">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -53,7 +53,7 @@
         <div id="customSidebar" class="sidebar">
             <button class="close-btn " id="closeSidebar">&times;</button>
             <ul class="sidebar-links">
-                <li><a href="/lista/docentes">Docentes</a></li>
+                <li class="d-flex flex-row"><span class="material-symbols-outlined mx-2 fs-5 d-flex align-items-center">group</span><a href="/lista/docentes">Docentes</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>

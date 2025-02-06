@@ -1,7 +1,7 @@
 <div class="container-fluid d-flex justify-content-center ">
    <div class="col-4 ">
       <div class="row ">
-         <div class="card text-center px-0 shadow">
+         <div class="card text-center px-0  shadow" style="margin-top: 90px;">
             <div class="card-header fw-light fst-italic">
                Bienvenido: {{ auth()->user()->nombres }}
             </div>

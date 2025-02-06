@@ -1,8 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold subNav-profile ">
-            {{ __('Perfil') }}
-        </h2>
+       <div class="subNav-profile ">
+            <h2 class="font-semibold subNav-text m-0">
+                {{ __('Perfil') }}
+            </h2>
+       </div>
     </x-slot>
 
     <div>
